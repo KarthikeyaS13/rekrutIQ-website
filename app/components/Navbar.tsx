@@ -2,11 +2,21 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Mail, Plus } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export function Navbar() {
+  const pathname = usePathname();
+
+  const navLinks = [
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Features", href: "/features" },
+    { name: "Contact Us", href: "/contact" },
+  ];
+
   return (
     <motion.header
       initial={{ y: -100 }}
@@ -20,11 +30,23 @@ export function Navbar() {
             <Image src="/riq_logo.png" alt="RekrutIQ Logo" width={140} height={40} className="h-10 w-auto object-contain" />
           </Link>
           
-          <nav className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-sm font-semibold text-brand-on-surface-variant hover:text-brand-primary transition-colors">Home</Link>
-            <Link href="/about" className="text-sm font-semibold text-brand-on-surface-variant hover:text-brand-primary transition-colors">About Us</Link>
-            <Link href="/features" className="text-sm font-semibold text-brand-on-surface-variant hover:text-brand-primary transition-colors">Features</Link>
-            <Link href="/contact" className="text-sm font-semibold text-brand-on-surface-variant hover:text-brand-primary transition-colors">Contact Us</Link>
+          <nav className="hidden md:flex items-center gap-1">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link 
+                  key={link.name}
+                  href={link.href} 
+                  className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${
+                    isActive 
+                      ? "bg-[#f1dbff] text-[#500088]" 
+                      : "text-[#7e7383] hover:text-[#500088] hover:bg-[#fbf0fc]"
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
           </nav>
           
           <div className="flex items-center gap-6">

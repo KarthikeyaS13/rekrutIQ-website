@@ -31,7 +31,7 @@ export default function Home() {
       <main className="pt-32 pb-24">
         {/* HERO SECTION */}
         <section className="relative mx-auto max-w-7xl px-4 md:px-8 mb-32">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -52,19 +52,22 @@ export default function Home() {
                 Book a Demo
               </Button>
             </div>
-            <p className="mt-6 text-sm text-[#7e7383] font-medium">Trusted by industry leaders worldwide.</p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
-            className="mt-16 relative rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-[0px_4px_40px_rgba(0,0,0,0.06)] bg-white/50"
+            animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
+            transition={{ 
+              opacity: { duration: 1, delay: 0.2, ease: "easeOut" },
+              scale: { duration: 1, delay: 0.2, ease: "easeOut" },
+              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
+            }}
+            className="mt-16 relative w-[100%] mx-auto rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-[0px_4px_40px_rgba(0,0,0,0.06)] bg-white/50"
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-[#6B21A8]/10 to-transparent mix-blend-multiply" />
-            <Image 
-              src="https://lh3.googleusercontent.com/aida/AP1WRLtJ624EKyl5qud5I7pPF3R8C5gZKFmd1GJc6horw4_5PWOCs040q7DEYlG0nrU-ZWfcwJSRToCpMPacDCACGo9ln0xXYGZddwlE7W8qGDDIPHLHqNkUSG18O4lf7EI-lV53SeyQufvdpP_nnoFI9FzkcJhrKAxmUjnvV5NXgr2vI_ztjK5TLPkth8M_OyjjXq6cXODwWlqb55aeuZcpxaLHFCccAoQ94rFXM6dVLwr6-fgCdJ3WCeuafQ0"
-              alt="Dashboard mockup"
+            <Image
+              src="/rek_banner.png"
+              alt="RekrutIQ Banner"
               width={1376}
               height={768}
               className="w-full h-auto object-cover relative z-10 rounded-2xl"
@@ -75,21 +78,27 @@ export default function Home() {
 
         {/* SMART ATS SECTION */}
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32" id="product">
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
             className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center"
           >
-            <div className="order-2 lg:order-1">
-              <motion.div variants={itemVariants} className="relative rounded-2xl overflow-hidden shadow-sm border border-[#E5E7EB]">
-                 <Image 
-                  src="https://lh3.googleusercontent.com/aida/AP1WRLsLjhhpSNmTQU4u5qhFKxtIFWQjWiY0VCgY_yGDhEqmgNepqnjcvevCmA59W5cEencI7NYyfK8TfjiQ35m9btFfA2B78c2qRkkfvTgbe8HPU24GDGWVYcAL3f3IynDE4LVmTrYLl1Dkno7AZytnr6ggbMua6Be_R75ZB-3iE4jC_8yx_ebeEBNIHFZfdH3KJnvrF-q_HWNXd4LvkdnzSc0ywqv2Hw2fLbi_4wxlc8aEGn2h2HiL__sxIro"
-                  alt="AI Node Visualization"
-                  width={600}
-                  height={600}
-                  className="w-full h-auto object-cover"
+            <div className="order-2 lg:order-1" style={{ perspective: 1000 }}>
+              <motion.div 
+                variants={itemVariants} 
+                className="relative rounded-2xl overflow-hidden"
+                whileHover={{ scale: 1.05, rotateY: 5, rotateX: -5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <video
+                  src="/ats.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-auto object-cover mix-blend-multiply brightness-[1.05] contrast-[1.05] rounded-2xl"
                 />
               </motion.div>
             </div>
@@ -130,7 +139,7 @@ export default function Home() {
         {/* AI INTELLIGENCE SECTION */}
         <section className="bg-[#f5ebf6] py-32 mb-32" id="solutions">
           <div className="mx-auto max-w-7xl px-4 md:px-8">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -146,7 +155,7 @@ export default function Home() {
               </p>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
@@ -191,7 +200,7 @@ export default function Home() {
 
         {/* INTEGRATIONS & KPI SECTION */}
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
-          <motion.div 
+          <motion.div
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
@@ -200,33 +209,33 @@ export default function Home() {
           >
             {/* Left: Integrations */}
             <motion.div variants={itemVariants}>
-               <Badge className="mb-6">Workflow</Badge>
-               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">
+              <Badge className="mb-6">Workflow</Badge>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">
                 Zero Disruptions
-               </h2>
-               <p className="text-lg text-[#4c4452] mb-8 leading-relaxed">
-                 No more tool-hopping. Manage everything from client intake to consultant payout in one seamless workflow with out-of-the-box integrations.
-               </p>
-               <div className="space-y-6">
-                 <div className="flex gap-4">
-                    <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-center text-[#500088]">
-                      <Building2 className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-semibold text-lg text-[#1f1a22] mb-1">Client & Job Capture</h4>
-                      <p className="text-[#4c4452]">Centralize all client details and requisitions instantly.</p>
-                    </div>
+              </h2>
+              <p className="text-lg text-[#4c4452] mb-8 leading-relaxed">
+                No more tool-hopping. Manage everything from client intake to consultant payout in one seamless workflow with out-of-the-box integrations.
+              </p>
+              <div className="space-y-6">
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-center text-[#500088]">
+                    <Building2 className="w-5 h-5" />
                   </div>
-                  <div className="flex gap-4">
-                    <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-center text-[#500088]">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
-                    </div>
-                    <div>
-                      <h4 className="font-heading font-semibold text-lg text-[#1f1a22] mb-1">Auto Invoicing Integration</h4>
-                      <p className="text-[#4c4452]">Generate and sync invoices seamlessly with Zoho, QuickBooks, or Tally upon placement.</p>
-                    </div>
+                  <div>
+                    <h4 className="font-heading font-semibold text-lg text-[#1f1a22] mb-1">Client & Job Capture</h4>
+                    <p className="text-[#4c4452]">Centralize all client details and requisitions instantly.</p>
                   </div>
-               </div>
+                </div>
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 mt-1 w-10 h-10 rounded-full bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-center text-[#500088]">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5"><path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"></path><path d="M12 12v9"></path><path d="m8 17 4 4 4-4"></path></svg>
+                  </div>
+                  <div>
+                    <h4 className="font-heading font-semibold text-lg text-[#1f1a22] mb-1">Auto Invoicing Integration</h4>
+                    <p className="text-[#4c4452]">Generate and sync invoices seamlessly with Zoho, QuickBooks, or Tally upon placement.</p>
+                  </div>
+                </div>
+              </div>
             </motion.div>
 
             {/* Right: KPIs */}
@@ -260,7 +269,7 @@ export default function Home() {
 
         {/* CTA SECTION */}
         <section className="mx-auto max-w-5xl px-4 md:px-8 text-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
