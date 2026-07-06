@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-heading: "Geist", sans-serif;
+
+  --color-brand-primary: #500088;
+  --color-brand-primary-container: #6b21a8;
+  --color-brand-on-primary: #ffffff;
+  
+  --color-brand-surface: #fff7fe;
+  --color-brand-surface-dim: #e1d7e2;
+  --color-brand-surface-bright: #fff7fe;
+  
+  --color-brand-secondary: #565e74;
+  --color-brand-on-secondary: #ffffff;
+  
+  --color-brand-accent: #4F46E5;
+  --color-brand-glass: rgba(255, 255, 255, 0.7);
+  --color-brand-border: #E5E7EB;
+
+  --color-brand-on-surface: #1f1a22;
+  --color-brand-on-surface-variant: #4c4452;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+
+  --shadow-micro: 0px 4px 20px rgba(0,0,0,0.03);
+}
+
+@layer base {
+  :root {
+    --background: var(--color-brand-surface);
+    --foreground: var(--color-brand-on-surface);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    @apply bg-[var(--color-brand-glass)] backdrop-blur-[16px] border border-[var(--color-brand-border)] shadow-[var(--shadow-micro)];
+  }
+}
