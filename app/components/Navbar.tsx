@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Mail, Plus } from "lucide-react";
+import { Mail, Plus, User } from "lucide-react";
 import { Button } from "./ui/Button";
 
 export function Navbar() {
@@ -59,7 +59,15 @@ export function Navbar() {
                 <a href="mailto:info@rekrutiq.io" className="text-sm font-bold text-brand-on-surface hover:text-brand-primary transition-colors">info@rekrutiq.io</a>
               </div>
             </div>
-            <Button size="md" className="rounded-full px-6 gap-2">Let's Talk <Plus className="h-4 w-4" /></Button>
+            <Link href="https://yfyai.online" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold text-[#500088] hover:text-[#380060] transition-colors">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f1dbff]">
+                <User className="h-5 w-5" />
+              </div>
+              <span className="hidden sm:inline">Login</span>
+            </Link>
+            <Link href="/contact">
+              <Button size="md" className="rounded-full px-6 gap-2">Let's Talk <Plus className="h-4 w-4" /></Button>
+            </Link>
           </div>
         </div>
       </div>

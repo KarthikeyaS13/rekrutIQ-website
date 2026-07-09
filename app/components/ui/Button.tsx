@@ -17,7 +17,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         className={cn(
-          "inline-flex items-center justify-center rounded-xl font-heading font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent disabled:opacity-50 disabled:pointer-events-none",
+          "inline-flex items-center justify-center rounded-xl font-heading font-semibold cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent disabled:opacity-50 disabled:pointer-events-none",
           {
             "bg-brand-primary text-white hover:bg-brand-primary-container": variant === "primary",
             "bg-transparent border border-brand-border text-brand-on-surface hover:bg-[#F3F4F6]": variant === "secondary",

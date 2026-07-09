@@ -1,8 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { 
-  Building2, Bell, Users, 
+import { motion, Variants } from "framer-motion";
+import {
+  Building2, Bell, Users,
   UserCheck, ShieldCheck, SplitSquareHorizontal,
   FileText, Database, TrendingUp,
   Mail, Clock, Repeat,
@@ -14,12 +14,12 @@ import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import Image from "next/image";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.15, delayChildren: 0.1 } },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
@@ -32,7 +32,7 @@ export default function Features() {
       <main className="pt-32 pb-24">
         {/* HERO SECTION */}
         <section className="text-center mx-auto max-w-4xl px-4 md:px-8 mb-24">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
@@ -50,14 +50,27 @@ export default function Features() {
         {/* FEATURE 1: Client & Agreement Management */}
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div variants={itemVariants} className="order-2 lg:order-1 relative rounded-3xl overflow-hidden glass-panel p-2 shadow-xl bg-white h-[450px]">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#6B21A8]/10 to-transparent mix-blend-multiply" />
-              <Image src="https://lh3.googleusercontent.com/aida/AP1WRLtJ624EKyl5qud5I7pPF3R8C5gZKFmd1GJc6horw4_5PWOCs040q7DEYlG0nrU-ZWfcwJSRToCpMPacDCACGo9ln0xXYGZddwlE7W8qGDDIPHLHqNkUSG18O4lf7EI-lV53SeyQufvdpP_nnoFI9FzkcJhrKAxmUjnvV5NXgr2vI_ztjK5TLPkth8M_OyjjXq6cXODwWlqb55aeuZcpxaLHFCccAoQ94rFXM6dVLwr6-fgCdJ3WCeuafQ0" alt="Client Management" width={800} height={600} className="w-full h-full object-cover rounded-2xl relative z-10" />
-            </motion.div>
+            <div className="order-2 lg:order-1 relative h-[450px]" style={{ perspective: 1000 }}>
+              <motion.div
+                variants={itemVariants}
+                className="relative h-full overflow-hidden rounded-3xl"
+                whileHover={{ scale: 1.05, rotateY: 5, rotateX: -5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <video
+                  src="/features.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover mix-blend-multiply brightness-[1.05] contrast-[1.05] rounded-3xl"
+                />
+              </motion.div>
+            </div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="warning" className="mb-4">UNIQUE FEATURES</Badge>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Comprehensive Client & Agreement Management</h2>
-              
+
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#f1dbff] flex items-center justify-center text-[#500088]"><Building2 className="w-6 h-6" /></div>
@@ -95,7 +108,7 @@ export default function Features() {
               <motion.div variants={itemVariants}>
                 <Badge variant="success" className="mb-4">UNIQUE FEATURES</Badge>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Role-Based Requisition Workflow</h2>
-                
+
                 <div className="space-y-6 mb-8">
                   <div className="flex gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#dae2fd] flex items-center justify-center text-[#131b2e]"><UserCheck className="w-6 h-6" /></div>
@@ -123,9 +136,23 @@ export default function Features() {
                   <p className="text-sm leading-relaxed"><strong className="text-[#dae2fd]">Edge:</strong> Other systems offer generic workflows; RekrutIQ mirrors your agency structure for true end-to-end control.</p>
                 </div>
               </motion.div>
-              <motion.div variants={itemVariants} className="relative rounded-3xl overflow-hidden shadow-xl bg-white h-[450px]">
-                <Image src="https://lh3.googleusercontent.com/aida/AP1WRLsLjhhpSNmTQU4u5qhFKxtIFWQjWiY0VCgY_yGDhEqmgNepqnjcvevCmA59W5cEencI7NYyfK8TfjiQ35m9btFfA2B78c2qRkkfvTgbe8HPU24GDGWVYcAL3f3IynDE4LVmTrYLl1Dkno7AZytnr6ggbMua6Be_R75ZB-3iE4jC_8yx_ebeEBNIHFZfdH3KJnvrF-q_HWNXd4LvkdnzSc0ywqv2Hw2fLbi_4wxlc8aEGn2h2HiL__sxIro" alt="Role Workflow" width={800} height={600} className="w-full h-full object-cover" />
-              </motion.div>
+              <div className="relative h-[450px]" style={{ perspective: 1000 }}>
+                <motion.div
+                  variants={itemVariants}
+                  className="relative h-full overflow-hidden rounded-3xl"
+                  whileHover={{ scale: 1.05, rotateY: -5, rotateX: -5 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <video
+                    src="/rolebased.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover mix-blend-multiply brightness-[1.05] contrast-[1.05] rounded-3xl"
+                  />
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -133,13 +160,27 @@ export default function Features() {
         {/* FEATURE 3: AI-Powered Talent Database */}
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div variants={itemVariants} className="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-xl bg-white h-[450px] p-2 glass-panel">
-               <Image src="/experience_graphic.png" alt="AI Talent Database" width={800} height={600} className="w-full h-full object-cover rounded-2xl" />
-            </motion.div>
+            <div className="order-2 lg:order-1 relative h-[450px]" style={{ perspective: 1000 }}>
+              <motion.div
+                variants={itemVariants}
+                className="relative h-full overflow-hidden rounded-3xl"
+                whileHover={{ scale: 1.05, rotateY: 5, rotateX: -5 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <video
+                  src="/talentdb.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  className="w-full h-full object-cover mix-blend-multiply brightness-[1.05] contrast-[1.05] rounded-3xl"
+                />
+              </motion.div>
+            </div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="default" className="mb-4">UNIQUE FEATURES</Badge>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">AI-Powered Talent Database & Sourcing</h2>
-              
+
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#f1dbff] flex items-center justify-center text-[#500088]"><FileText className="w-6 h-6" /></div>
@@ -177,7 +218,7 @@ export default function Features() {
               <motion.div variants={itemVariants}>
                 <Badge className="mb-4">UNIQUE FEATURES</Badge>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Integrated Communication Hub</h2>
-                
+
                 <div className="space-y-6 mb-8">
                   <div className="flex gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#f1dbff] flex items-center justify-center text-[#500088]"><Mail className="w-6 h-6" /></div>
@@ -205,9 +246,23 @@ export default function Features() {
                   <p className="text-sm leading-relaxed"><strong className="text-[#dfb7ff]">Insight:</strong> Instead of relying on external emailing tools, RekrutIQ keeps all interactions in-platform—saving time and preventing miscommunication.</p>
                 </div>
               </motion.div>
-              <motion.div variants={itemVariants} className="relative rounded-3xl overflow-hidden shadow-xl bg-white h-[450px]">
-                <Image src="https://lh3.googleusercontent.com/aida/AP1WRLtJ624EKyl5qud5I7pPF3R8C5gZKFmd1GJc6horw4_5PWOCs040q7DEYlG0nrU-ZWfcwJSRToCpMPacDCACGo9ln0xXYGZddwlE7W8qGDDIPHLHqNkUSG18O4lf7EI-lV53SeyQufvdpP_nnoFI9FzkcJhrKAxmUjnvV5NXgr2vI_ztjK5TLPkth8M_OyjjXq6cXODwWlqb55aeuZcpxaLHFCccAoQ94rFXM6dVLwr6-fgCdJ3WCeuafQ0" alt="Communication Hub" width={800} height={600} className="w-full h-full object-cover grayscale opacity-80" />
-              </motion.div>
+              <div className="relative h-[450px]" style={{ perspective: 1000 }}>
+                <motion.div
+                  variants={itemVariants}
+                  className="relative h-full overflow-hidden rounded-3xl"
+                  whileHover={{ scale: 1.05, rotateY: -5, rotateX: 5 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <video
+                    src="/communication.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover mix-blend-multiply brightness-[1.05] contrast-[1.05] rounded-3xl"
+                  />
+                </motion.div>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -215,14 +270,25 @@ export default function Features() {
         {/* FEATURE 5: Invoicing & Finance + Payroll Sync */}
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div variants={itemVariants} className="order-2 lg:order-1 relative rounded-3xl overflow-hidden shadow-xl border border-[#E5E7EB] bg-white h-[450px]">
-               <div className="absolute inset-0 bg-gradient-to-tr from-[#6B21A8]/5 to-transparent mix-blend-multiply" />
-               <Image src="https://lh3.googleusercontent.com/aida/AP1WRLsLjhhpSNmTQU4u5qhFKxtIFWQjWiY0VCgY_yGDhEqmgNepqnjcvevCmA59W5cEencI7NYyfK8TfjiQ35m9btFfA2B78c2qRkkfvTgbe8HPU24GDGWVYcAL3f3IynDE4LVmTrYLl1Dkno7AZytnr6ggbMua6Be_R75ZB-3iE4jC_8yx_ebeEBNIHFZfdH3KJnvrF-q_HWNXd4LvkdnzSc0ywqv2Hw2fLbi_4wxlc8aEGn2h2HiL__sxIro" alt="Finance Integration" width={800} height={600} className="w-full h-full object-cover" />
+            <motion.div variants={itemVariants} className="order-2 lg:order-1 relative h-[450px] flex items-center justify-center">
+              <motion.div 
+                animate={{ y: [-10, 10, -10] }} 
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="w-full h-full"
+              >
+                <Image 
+                  src="/integrations.png" 
+                  alt="Finance Integration" 
+                  width={800} 
+                  height={600} 
+                  className="w-full h-full object-contain mix-blend-multiply brightness-[1.05] contrast-[1.05]" 
+                />
+              </motion.div>
             </motion.div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="warning" className="mb-4">UNIQUE FEATURES</Badge>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Invoicing & Finance + Payroll Sync</h2>
-              
+
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#ffddbb] flex items-center justify-center text-[#2b1700]"><Receipt className="w-6 h-6" /></div>
@@ -260,7 +326,7 @@ export default function Features() {
               <motion.div variants={itemVariants}>
                 <Badge variant="success" className="mb-4">UNIQUE FEATURES</Badge>
                 <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Live Dashboards & Analytics</h2>
-                
+
                 <div className="space-y-6 mb-8">
                   <div className="flex gap-4">
                     <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#dae2fd] flex items-center justify-center text-[#131b2e]"><BarChart3 className="w-6 h-6" /></div>
@@ -289,7 +355,7 @@ export default function Features() {
                 </div>
               </motion.div>
               <motion.div variants={itemVariants} className="relative rounded-3xl overflow-hidden glass-panel p-2 shadow-xl bg-white h-[450px]">
-                 <Image src="/experience_graphic.png" alt="Analytics Dashboard" width={800} height={600} className="w-full h-full object-cover rounded-2xl grayscale opacity-90" />
+                <Image src="/experience_graphic.png" alt="Analytics Dashboard" width={800} height={600} className="w-full h-full object-cover rounded-2xl grayscale opacity-90" />
               </motion.div>
             </motion.div>
           </div>

@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center mb-6">
-              <Image src="/riq_logo.png" alt="RekrutIQ Logo" width={160} height={45} className="h-12 w-auto object-contain" />
+              <Image src="/rekdarkmode.png" alt="RekrutIQ Logo" width={320} height={90} className="h-24 w-auto object-contain" />
             </Link>
             <p className="text-[#a199a6] max-w-sm text-sm leading-relaxed">
               Powering Recruitment Agencies from First Hello to Final Invoice. Built for Recruiters. Powered by AI.
@@ -41,8 +41,7 @@ export function Footer() {
         <div className="pt-8 border-t border-[#342e37] flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-[#7e7383]">
           <p>© {new Date().getFullYear()} RekrutIQ. All rights reserved.</p>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">LinkedIn <ArrowUpRight className="w-3 h-3" /></Link>
-            <Link href="#" className="hover:text-white transition-colors flex items-center gap-1">Twitter <ArrowUpRight className="w-3 h-3" /></Link>
+            <Link href="https://www.linkedin.com/company/finnovo/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors flex items-center gap-1">LinkedIn <ArrowUpRight className="w-3 h-3" /></Link>
           </div>
         </div>
       </div>
