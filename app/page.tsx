@@ -9,6 +9,9 @@ import { GlassCard } from "./components/ui/GlassCard";
 import { Badge } from "./components/ui/Badge";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { HeroCarousel } from "./components/HeroCarousel";
+import { IntegrationsSection } from "./components/IntegrationsSection";
+import { EcosystemSection } from "./components/EcosystemSection";
 
 // Stagger variations for Framer Motion
 const containerVariants: Variants = {
@@ -57,26 +60,7 @@ export default function Home() {
             </div>
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1, y: [0, -15, 0] }}
-            transition={{
-              opacity: { duration: 1, delay: 0.2, ease: "easeOut" },
-              scale: { duration: 1, delay: 0.2, ease: "easeOut" },
-              y: { duration: 6, repeat: Infinity, ease: "easeInOut" }
-            }}
-            className="mt-16 relative w-[100%] mx-auto rounded-2xl overflow-hidden border border-[#E5E7EB] shadow-[0px_4px_40px_rgba(0,0,0,0.06)] bg-white/50"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#6B21A8]/10 to-transparent mix-blend-multiply" />
-            <Image
-              src="/rek_banner.png"
-              alt="RekrutIQ Banner"
-              width={1376}
-              height={768}
-              className="w-full h-auto object-cover relative z-10 rounded-2xl"
-              priority
-            />
-          </motion.div>
+          <HeroCarousel />
         </section>
 
         {/* WHAT MAKES US DIFFERENT SECTION */}
@@ -452,6 +436,9 @@ export default function Home() {
             </div>
           </motion.div>
         </section>
+
+        <IntegrationsSection />
+        <EcosystemSection />
       </main>
 
       <Footer />

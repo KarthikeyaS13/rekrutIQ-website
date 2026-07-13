@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "RekrutIQ | Intelligent Recruitment Platform",
     description: "Built for speed, powered by intelligence.",
+  },
+  icons: {
+    icon: "/iqfavicon.png",
   }
 };
 

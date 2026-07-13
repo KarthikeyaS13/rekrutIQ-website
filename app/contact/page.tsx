@@ -1,13 +1,78 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Mail, Clock, Send } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
 import { Button } from "../components/ui/Button";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
+import { ScheduleConsultation } from "../components/ScheduleConsultation";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+  });
+  
+  const [scheduleData, setScheduleData] = useState<{ date: Date | null; time: string | null }>({
+    date: null,
+    time: null,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+
+  const isContactInfoFilled = formData.firstName.trim() !== "" && 
+                              formData.lastName.trim() !== "" && 
+                              formData.email.trim() !== "" && 
+                              formData.phone.trim() !== "";
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleScheduleChange = (date: Date | null, time: string | null) => {
+    setScheduleData({ date, time });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          selectedDate: scheduleData.date,
+          selectedTime: scheduleData.time,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus("success");
+        setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
+        setScheduleData({ date: null, time: null });
+      } else {
+        setSubmitStatus("error");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   return (
     <div className="relative min-h-screen">
       <Navbar />
@@ -27,13 +92,13 @@ export default function Contact() {
             </h1>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             {/* Contact Information (Left) */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-              className="flex flex-col justify-center space-y-10"
+              className="flex flex-col justify-start pt-4 space-y-10 lg:col-span-5"
             >
               <div>
                 <h3 className="font-heading text-2xl font-bold text-[#1f1a22] mb-6">Get in Touch</h3>
@@ -88,8 +153,9 @@ export default function Contact() {
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+              className="lg:col-span-7"
             >
-              <form className="glass-panel p-8 md:p-10 rounded-[2rem] border border-[#E5E7EB] shadow-xl bg-white relative">
+              <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-10 rounded-[2rem] border border-[#E5E7EB] shadow-xl bg-white relative">
                 <div className="absolute top-0 right-0 p-8 opacity-5">
                   <Send className="w-48 h-48 text-[#500088]" />
                 </div>
@@ -99,6 +165,9 @@ export default function Contact() {
                       <label className="text-sm font-semibold text-[#1f1a22]">First Name*</label>
                       <input
                         type="text"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
                         placeholder="Rahul"
@@ -108,6 +177,9 @@ export default function Contact() {
                       <label className="text-sm font-semibold text-[#1f1a22]">Last Name*</label>
                       <input
                         type="text"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
                         placeholder="Sharma"
@@ -120,6 +192,9 @@ export default function Contact() {
                       <label className="text-sm font-semibold text-[#1f1a22]">Your Mail*</label>
                       <input
                         type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
                         placeholder="rahul@example.com"
@@ -129,6 +204,9 @@ export default function Contact() {
                       <label className="text-sm font-semibold text-[#1f1a22]">Phone Number*</label>
                       <input
                         type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleInputChange}
                         required
                         className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
                         placeholder="+91 98765 43210"
@@ -140,6 +218,9 @@ export default function Contact() {
                     <label className="text-sm font-semibold text-[#1f1a22]">Your Subject*</label>
                     <input
                       type="text"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleInputChange}
                       required
                       className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
                       placeholder="How can we help?"
@@ -147,18 +228,40 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-[#1f1a22]">Write your message*</label>
+                    <label className="text-sm font-semibold text-[#1f1a22]">Write your message</label>
                     <textarea
-                      required
+                      name="message"
+                      value={formData.message}
+                      onChange={handleInputChange}
                       rows={4}
                       className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all resize-none"
                       placeholder="Tell us more about your requirements..."
                     />
                   </div>
 
-                  <Button type="button" size="lg" className="w-full mt-4">
-                    Send Message
+                  <AnimatePresence>
+                    {isContactInfoFilled && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                        animate={{ opacity: 1, height: "auto", marginTop: 24 }}
+                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <ScheduleConsultation onScheduleChange={handleScheduleChange} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
+                  <Button type="submit" size="lg" className="w-full mt-4" disabled={isSubmitting}>
+                    {isSubmitting ? "Scheduling..." : "Schedule Now"}
                   </Button>
+
+                  {submitStatus === "success" && (
+                    <p className="text-green-600 text-sm font-semibold text-center mt-2">Your message has been sent successfully!</p>
+                  )}
+                  {submitStatus === "error" && (
+                    <p className="text-red-600 text-sm font-semibold text-center mt-2">There was an error sending your message. Please try again.</p>
+                  )}
                 </div>
               </form>
             </motion.div>

@@ -158,7 +158,7 @@ export default function Features() {
         </section>
 
         {/* FEATURE 3: AI-Powered Talent Database */}
-        <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
+        <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32" id="sourcing">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="order-2 lg:order-1 relative h-[450px]" style={{ perspective: 1000 }}>
               <motion.div
@@ -212,7 +212,7 @@ export default function Features() {
         </section>
 
         {/* FEATURE 4: Integrated Communication Hub */}
-        <section className="bg-white border-y border-[#E5E7EB] py-32 mb-32">
+        <section className="bg-white border-y border-[#E5E7EB] py-32 mb-32" id="communication">
           <div className="mx-auto max-w-7xl px-4 md:px-8">
             <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div variants={itemVariants}>
@@ -268,7 +268,7 @@ export default function Features() {
         </section>
 
         {/* FEATURE 5: Invoicing & Finance + Payroll Sync */}
-        <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32">
+        <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32" id="finance">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={itemVariants} className="order-2 lg:order-1 relative h-[450px] flex items-center justify-center">
               <motion.div 
@@ -355,7 +355,7 @@ export default function Features() {
                 </div>
               </motion.div>
               <motion.div variants={itemVariants} className="relative rounded-3xl overflow-hidden glass-panel p-2 shadow-xl bg-white h-[450px]">
-                <Image src="/experience_graphic.png" alt="Analytics Dashboard" width={800} height={600} className="w-full h-full object-cover rounded-2xl grayscale opacity-90" />
+                <Image src="/dashboards.jpeg" alt="Analytics Dashboard" width={800} height={600} className="w-full h-full object-cover rounded-2xl" />
               </motion.div>
             </motion.div>
           </div>

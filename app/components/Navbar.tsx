@@ -29,26 +29,25 @@ export function Navbar() {
           <Link href="/" className="flex items-center">
             <Image src="/riq_logo.png" alt="RekrutIQ Logo" width={140} height={40} className="h-10 w-auto object-contain" />
           </Link>
-          
+
           <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => {
               const isActive = pathname === link.href;
               return (
-                <Link 
+                <Link
                   key={link.name}
-                  href={link.href} 
-                  className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${
-                    isActive 
-                      ? "bg-[#f1dbff] text-[#500088]" 
+                  href={link.href}
+                  className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${isActive
+                      ? "bg-[#f1dbff] text-[#500088]"
                       : "text-[#7e7383] hover:text-[#500088] hover:bg-[#fbf0fc]"
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </Link>
               );
             })}
           </nav>
-          
+
           <div className="flex items-center gap-6">
             <div className="hidden lg:flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f1dbff] text-[#500088]">
@@ -59,15 +58,16 @@ export function Navbar() {
                 <a href="mailto:info@rekrutiq.io" className="text-sm font-bold text-brand-on-surface hover:text-brand-primary transition-colors">info@rekrutiq.io</a>
               </div>
             </div>
-            <Link href="https://yfyai.online" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-sm font-semibold text-[#500088] hover:text-[#380060] transition-colors">
+            <Link href="/contact" className="flex items-center gap-2 text-sm font-semibold text-[#500088] hover:text-[#380060] transition-colors">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#f1dbff]">
-                <User className="h-5 w-5" />
+                <Plus className="h-5 w-5" />
               </div>
-              <span className="hidden sm:inline">Login</span>
+              <span className="hidden sm:inline">Let's Talk</span>
             </Link>
-            <Link href="/contact">
-              <Button size="md" className="rounded-full px-6 gap-2">Let's Talk <Plus className="h-4 w-4" /></Button>
+            <Link href="https://yfyai.online" target="_blank" rel="noopener noreferrer">
+              <Button size="md" className="rounded-full px-6 gap-2">Login <User className="h-4 w-4" /></Button>
             </Link>
+
           </div>
         </div>
       </div>
