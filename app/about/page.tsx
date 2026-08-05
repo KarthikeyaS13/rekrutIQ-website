@@ -1,20 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Play, CheckCircle2, Target, Brain, Briefcase, Zap, ShieldCheck, HeartHandshake, Layers } from "lucide-react";
+import { motion, type Variants } from "framer-motion";
+import { CheckCircle2, Target, Brain, Briefcase, Zap, ShieldCheck, HeartHandshake, Layers } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { GlassCard } from "../components/ui/GlassCard";
 import { Badge } from "../components/ui/Badge";
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 import Image from "next/image";
+import Link from "next/link";
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
@@ -36,23 +37,12 @@ export default function About() {
             <div>
               <Badge variant="default" className="mb-6">About FINNOVO®</Badge>
               <h1 className="font-heading text-4xl md:text-6xl font-bold tracking-tight mb-8 leading-[1.1] text-[#1f1a22]">
-                Built on Expertise.<br />
-                <span className="text-[#500088]">Driven by Innovation.</span>
+                Built by Industry Experts.<br />
+                <span className="text-[#500088]">Driven by AI Innovation.</span>
               </h1>
-              <p className="text-lg text-[#4c4452] mb-6 leading-relaxed">
-                <strong className="font-semibold text-[#1f1a22]">rekrutIQ™</strong> is a product of <strong className="font-semibold text-[#1f1a22]">FINNOVO®</strong>, a tech-first company with deep roots in finance, HR, and operations. With flagship platforms like yfy.ai for end-to-end HR and payroll automation and rekrutIQ™ for intelligent recruitment, FINNOVO® brings a rare blend of domain expertise and technology innovation.
+              <p className="text-lg text-[#4c4452] leading-relaxed">
+                <strong className="font-semibold text-[#1f1a22]">RekrutIQ</strong> is the flagship recruitment solution developed by <strong className="font-semibold text-[#1f1a22]">FINNOVO®</strong>, a technology leader at the intersection of finance, HR, and operations. Unlike generic software vendors, we built RekrutIQ from the ground up specifically for recruitment and staffing agencies, combining deep domain expertise with cutting-edge AI.
               </p>
-              <p className="text-lg text-[#4c4452] mb-10 leading-relaxed">
-                Unlike typical software companies, FINNOVO® is built by finance and compliance professionals, giving it an insider’s view of real-world business challenges—and the tools to solve them at scale.
-              </p>
-              <div className="flex flex-col sm:flex-row items-center gap-4">
-                <Button size="lg" className="w-full sm:w-auto gap-2">
-                  <Play className="w-4 h-4 fill-current" /> Watch Video
-                </Button>
-                <Button size="lg" variant="secondary" className="w-full sm:w-auto">
-                  To Know More
-                </Button>
-              </div>
             </div>
             
             <div className="relative">
@@ -170,14 +160,16 @@ export default function About() {
               <div className="relative z-10">
                 <Badge className="mb-6 bg-white/20 text-white hover:bg-white/30 border-none">Our Mission</Badge>
                 <h2 className="font-heading text-3xl md:text-5xl font-bold tracking-tight mb-6 leading-tight">
-                  Simplify Recruitment.<br />Focus on Growth.
+                  Empowering Recruitment Agencies<br />to Focus on Growth
                 </h2>
                 <p className="text-[#dfb7ff] text-lg mb-10 leading-relaxed">
-                  To empower recruitment agencies with a single, intelligent platform that automates their full lifecycle—from client intake to candidate placement and revenue realization—so they can focus on what matters: building relationships and scaling growth.
+                  Our mission is simple: to give recruitment agencies an unfair advantage. We automate the heavy lifting of the entire recruitment lifecycle—from client intake to candidate placement and revenue realization. We eliminate administrative overhead so your recruiters can focus on what they do best: building relationships and closing roles.
                 </p>
-                <Button size="lg" className="bg-white text-[#500088] hover:bg-[#fbf0fc] w-fit">
-                  Get Started
-                </Button>
+                <Link href="/contact">
+                  <Button size="lg" className="bg-white text-[#500088] hover:bg-[#fbf0fc] w-fit cursor-pointer">
+                    Get Started
+                  </Button>
+                </Link>
               </div>
             </motion.div>
 
@@ -185,7 +177,7 @@ export default function About() {
             <motion.div variants={itemVariants} className="flex flex-col justify-center">
               <Badge variant="success" className="mb-6 w-fit">Expertise that builds smarter software.</Badge>
               <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">
-                The Power of Domain-Led Tech
+                The Power of Domain-Led Technology
               </h2>
               
               <div className="space-y-8">
@@ -194,8 +186,8 @@ export default function About() {
                     <Target className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">Context-Driven Innovation</h4>
-                    <p className="text-[#4c4452] text-lg">We build tech that understands the problem before solving it.</p>
+                    <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">Built for Agencies, By Experts</h4>
+                    <p className="text-[#4c4452] text-lg">Designed by recruitment veterans and financial compliance specialists.</p>
                   </div>
                 </div>
                 
@@ -204,18 +196,8 @@ export default function About() {
                     <ShieldCheck className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">Scalable by Design</h4>
-                    <p className="text-[#4c4452] text-lg">Our domain insight future-proofs every feature from day one.</p>
-                  </div>
-                </div>
-                
-                <div className="flex gap-5">
-                  <div className="flex-shrink-0 mt-1 w-12 h-12 rounded-2xl bg-white border border-[#E5E7EB] shadow-sm flex items-center justify-center text-[#500088]">
-                    <Brain className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">Human Logic Meets Code</h4>
-                    <p className="text-[#4c4452] text-lg">We bridge business realities with engineering precision.</p>
+                    <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">End-to-End Visibility</h4>
+                    <p className="text-[#4c4452] text-lg">We connect the front-office (sourcing and placements) directly to the back-office (invoicing and payroll).</p>
                   </div>
                 </div>
               </div>

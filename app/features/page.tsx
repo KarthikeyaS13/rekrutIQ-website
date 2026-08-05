@@ -69,7 +69,8 @@ export default function Features() {
             </div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="warning" className="mb-4">UNIQUE FEATURES</Badge>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Comprehensive Client & Agreement Management</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">Comprehensive CRM for Recruitment Clients</h2>
+              <p className="text-[#4c4452] text-lg mb-8 leading-relaxed">Consolidate client data, contracts, and distinct rate cards in one secure hub. Get proactive alerts before agreements expire to ensure uninterrupted billing for contract placements.</p>
 
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
@@ -107,7 +108,8 @@ export default function Features() {
             <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div variants={itemVariants}>
                 <Badge variant="success" className="mb-4">UNIQUE FEATURES</Badge>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Role-Based Requisition Workflow</h2>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">Structured Workflows for Agency Teams</h2>
+                <p className="text-[#4c4452] text-lg mb-8 leading-relaxed">Enforce accountability with customized hand-offs from Admins to Team Leads to Recruiters. Manage permanent and contract staffing pipelines with separate, optimized workflows.</p>
 
                 <div className="space-y-6 mb-8">
                   <div className="flex gap-4">
@@ -179,7 +181,8 @@ export default function Features() {
             </div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="default" className="mb-4">UNIQUE FEATURES</Badge>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">AI-Powered Talent Database & Sourcing</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">Build Your Proprietary AI Talent Pool</h2>
+              <p className="text-[#4c4452] text-lg mb-8 leading-relaxed">Stop paying for the same candidates twice. RekrutIQ’s AI engine automatically parses every resume, categorizes skills, and intelligently ranks candidates against new job requisitions—slashing your reliance on expensive job boards.</p>
 
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
@@ -271,23 +274,24 @@ export default function Features() {
         <section className="mx-auto max-w-7xl px-4 md:px-8 mb-32" id="finance">
           <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <motion.div variants={itemVariants} className="order-2 lg:order-1 relative h-[450px] flex items-center justify-center">
-              <motion.div 
-                animate={{ y: [-10, 10, -10] }} 
+              <motion.div
+                animate={{ y: [-10, 10, -10] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
                 className="w-full h-full"
               >
-                <Image 
-                  src="/integrations.png" 
-                  alt="Finance Integration" 
-                  width={800} 
-                  height={600} 
-                  className="w-full h-full object-contain mix-blend-multiply brightness-[1.05] contrast-[1.05]" 
+                <Image
+                  src="/integrations.png"
+                  alt="Finance Integration"
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-contain mix-blend-multiply brightness-[1.05] contrast-[1.05]"
                 />
               </motion.div>
             </motion.div>
             <motion.div variants={itemVariants} className="order-1 lg:order-2">
               <Badge variant="warning" className="mb-4">UNIQUE FEATURES</Badge>
-              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Invoicing & Finance + Payroll Sync</h2>
+              <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">Recruitment Billing & Payroll Automation</h2>
+              <p className="text-[#4c4452] text-lg mb-8 leading-relaxed">Erase the disconnect between recruiters and finance. RekrutIQ automatically generates invoices upon candidate joining. For contract staffing, sync directly with yfy® Payroll, QuickBooks, or Zoho Books for effortless monthly payouts.</p>
 
               <div className="space-y-6 mb-8">
                 <div className="flex gap-4">
@@ -313,7 +317,7 @@ export default function Features() {
                 </div>
               </div>
               <div className="bg-[#1f1a22] text-white p-6 rounded-2xl shadow-md">
-                <p className="text-sm leading-relaxed"><strong className="text-[#ffddbb]">Benefit:</strong> You no longer need to export data for billing. RekrutIQ automates invoicing and payroll—eliminating friction between recruitment and finance teams.</p>
+                <p className="text-sm leading-relaxed"><strong className="text-[#ffddbb]">Benefit:</strong> You no longer need to export data for billing. RekrutIQ automates invoicing and payroll eliminating friction between recruitment and finance teams.</p>
               </div>
             </motion.div>
           </motion.div>
@@ -325,7 +329,8 @@ export default function Features() {
             <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-100px" }} className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
               <motion.div variants={itemVariants}>
                 <Badge variant="success" className="mb-4">UNIQUE FEATURES</Badge>
-                <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-8 text-[#1f1a22]">Live Dashboards & Analytics</h2>
+                <h2 className="font-heading text-3xl md:text-4xl font-bold tracking-tight mb-6 text-[#1f1a22]">Real-Time Analytics & Recruiter KPIs</h2>
+                <p className="text-[#4c4452] text-lg mb-8 leading-relaxed">Make data-driven decisions. Monitor interview-to-offer ratios, track individual recruiter ROI, and identify pipeline bottlenecks before they impact your bottom line.</p>
 
                 <div className="space-y-6 mb-8">
                   <div className="flex gap-4">

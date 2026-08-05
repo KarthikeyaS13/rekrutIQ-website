@@ -1,5 +1,18 @@
 import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
+import { sendNewConsultationNotification, sendMeetingInvitationToUser } from '@/lib/mail';
+import { getBookedSlots, addBooking } from '@/lib/bookings';
+
+export const dynamic = 'force-dynamic';
+
+export async function GET() {
+  try {
+    const bookedSlots = await getBookedSlots();
+    return NextResponse.json({ bookedSlots }, { status: 200 });
+  } catch (error: any) {
+    console.error('Error fetching booked slots:', error);
+    return NextResponse.json({ bookedSlots: {} }, { status: 200 });
+  }
+}
 
 export async function POST(req: Request) {
   try {
@@ -13,131 +26,63 @@ export async function POST(req: Request) {
       );
     }
 
-    const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
-      port: parseInt(process.env.SMTP_PORT || '587'),
-      secure: process.env.SMTP_SECURE === 'true', // true for 465, false for other ports
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    });
+    const fullName = `${firstName} ${lastName}`.trim();
+    const nowIst = new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata' });
 
-    // Determine the subject line
-    const emailSubject = subject || `New Consultation Request from ${firstName} ${lastName}`;
-
-    const htmlContent = `
-      <h2>New Consultation Request</h2>
-      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone:</strong> ${phone}</p>
-      <p><strong>Subject:</strong> ${subject || 'N/A'}</p>
-      <p><strong>Message:</strong></p>
-      <p>${message || 'No message provided.'}</p>
-      
-      <br />
-      <h3>Scheduling Request</h3>
-      <p><strong>Date:</strong> ${selectedDate ? new Date(selectedDate).toLocaleDateString() : 'Not selected'}</p>
-      <p><strong>Time:</strong> ${selectedTime || 'Not selected'}</p>
-    `;
-
-    const mailOptions = {
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
-      to: 'info@rekrutiq.io',
-      subject: emailSubject,
-      html: htmlContent,
-      replyTo: email,
-    };
-
-    // Verify SMTP configuration if not in development
-    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
-        console.warn("SMTP credentials not provided. Simulating email send for development.");
-        console.log("Would have sent:", mailOptions);
-        return NextResponse.json({ message: 'Email request received (simulated due to missing credentials).' }, { status: 200 });
-    }
-
-    // 1. Send email to admin
-    await transporter.sendMail(mailOptions);
-
-    // 2. Send calendar invitation to the user (if date and time are selected)
-    if (selectedDate && selectedTime) {
-      let startUTC = "";
-      let endUTC = "";
-      
-      const match = selectedTime.match(/(\d+):(\d+)\s*(AM|PM)/i);
-      if (match) {
-        let hours = parseInt(match[1]);
-        const minutes = parseInt(match[2]);
-        const ampm = match[3].toUpperCase();
-        if (ampm === 'PM' && hours < 12) hours += 12;
-        if (ampm === 'AM' && hours === 12) hours = 0;
-        
-        // Format YYYY-MM-DD in IST
+    // Format date string as YYYY-MM-DD
+    let dateKey: string | null = null;
+    if (selectedDate) {
+      if (typeof selectedDate === 'string' && selectedDate.includes('-') && !selectedDate.includes('T')) {
+        dateKey = selectedDate;
+      } else {
+        const d = new Date(selectedDate);
         const formatter = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' });
-        const dateStr = formatter.format(new Date(selectedDate)); 
-        
-        const isoString = `${dateStr}T${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:00+05:30`;
-        const startDt = new Date(isoString);
-        const endDt = new Date(startDt.getTime() + 30 * 60 * 1000); // 30 minutes duration
-        
-        const formatToUTC = (dt: Date) => dt.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-        startUTC = formatToUTC(startDt);
-        endUTC = formatToUTC(endDt);
-        
-        const icalContent = [
-          'BEGIN:VCALENDAR',
-          'VERSION:2.0',
-          'PRODID:-//RekrutIQ//EN',
-          'METHOD:REQUEST',
-          'BEGIN:VEVENT',
-          `UID:${require('crypto').randomUUID()}@rekrutiq.io`,
-          `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z'}`,
-          `DTSTART:${startUTC}`,
-          `DTEND:${endUTC}`,
-          `SUMMARY:Consultation with RekrutIQ`,
-          `ORGANIZER;CN=RekrutIQ:mailto:${process.env.SMTP_FROM || 'info@rekrutiq.io'}`,
-          `ATTENDEE;RSVP=TRUE;ROLE=REQ-PARTICIPANT;PARTSTAT=NEEDS-ACTION;CN=${firstName} ${lastName}:mailto:${email}`,
-          `LOCATION:Online Meeting (Link to be provided)`,
-          `DESCRIPTION:Consultation regarding: ${subject || 'N/A'}`,
-          'STATUS:CONFIRMED',
-          'SEQUENCE:0',
-          'BEGIN:VALARM',
-          'TRIGGER:-PT15M',
-          'DESCRIPTION:Reminder',
-          'ACTION:DISPLAY',
-          'END:VALARM',
-          'END:VEVENT',
-          'END:VCALENDAR'
-        ].join('\r\n');
-
-        const userMailOptions = {
-          from: process.env.SMTP_FROM || process.env.SMTP_USER,
-          to: email,
-          subject: `Invitation: Consultation with RekrutIQ`,
-          html: `
-            <p>Hi ${firstName},</p>
-            <p>Thank you for scheduling a consultation with us.</p>
-            <p>Please find the calendar invitation attached. We look forward to speaking with you!</p>
-            <p>Best regards,<br/>RekrutIQ Team</p>
-          `,
-          icalEvent: {
-            method: 'request',
-            content: icalContent
-          }
-        };
-
-        await transporter.sendMail(userMailOptions);
+        dateKey = formatter.format(d);
       }
     }
 
+    // If a time slot was chosen, record it so it cannot be booked again
+    if (dateKey && selectedTime) {
+      await addBooking({
+        date: dateKey,
+        time: selectedTime,
+        fullName,
+        email,
+        createdAt: nowIst,
+      });
+    }
+
+    // 1. Send detailed notification to admin (info@rekrutiq.io)
+    await sendNewConsultationNotification({
+      fullName,
+      workEmail: email,
+      phoneNumber: phone,
+      primaryInterest: subject || 'Consultation Request',
+      messageDetails: message || '',
+      scheduledDate: selectedDate || null,
+      scheduledTime: selectedTime || null,
+      createdAt: nowIst,
+    });
+
+    // 2. Send meeting invitation to the user if date and time were selected
+    if (selectedDate && selectedTime) {
+      await sendMeetingInvitationToUser({
+        fullName,
+        workEmail: email,
+        primaryInterest: subject || 'Consultation with RekrutIQ',
+        scheduledDate: selectedDate,
+        scheduledTime: selectedTime,
+      });
+    }
+
     return NextResponse.json(
-      { message: 'Email sent successfully!' },
+      { message: 'Request submitted successfully!' },
       { status: 200 }
     );
   } catch (error: any) {
-    console.error('Error sending email:', error);
+    console.error('Error in contact API route:', error);
     return NextResponse.json(
-      { error: 'Failed to send email.', details: error.message },
+      { error: 'Failed to process request.', details: error.message },
       { status: 500 }
     );
   }

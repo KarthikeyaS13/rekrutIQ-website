@@ -6,20 +6,20 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
-  title: "RekrutIQ | Intelligent Recruitment Platform",
-  description: "Streamline sourcing, candidate tracking, and invoicing in one enterprise-grade platform. Built for speed, powered by intelligence.",
-  keywords: ["ATS", "Recruitment", "AI Matching", "Agency Software"],
+  title: "RekrutIQ | AI-Powered ATS & CRM for Recruitment Agencies",
+  description: "RekrutIQ is the ultimate end-to-end recruitment platform for staffing agencies. Combine a smart ATS, CRM, automated invoicing, and AI candidate matching in one unified dashboard.",
+  keywords: ["Recruitment agency software", "AI applicant tracking system", "staffing agency CRM", "automated recruitment workflows"],
   openGraph: {
-    title: "RekrutIQ | Intelligent Recruitment Platform",
-    description: "Built for speed, powered by intelligence.",
+    title: "RekrutIQ | AI-Powered ATS & CRM for Recruitment Agencies",
+    description: "RekrutIQ is the ultimate end-to-end recruitment platform for staffing agencies. Combine a smart ATS, CRM, automated invoicing, and AI candidate matching in one unified dashboard.",
     url: "https://rekrutiq.io",
     siteName: "RekrutIQ",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RekrutIQ | Intelligent Recruitment Platform",
-    description: "Built for speed, powered by intelligence.",
+    title: "RekrutIQ | AI-Powered ATS & CRM for Recruitment Agencies",
+    description: "RekrutIQ is the ultimate end-to-end recruitment platform for staffing agencies. Combine a smart ATS, CRM, automated invoicing, and AI candidate matching in one unified dashboard.",
   },
   icons: {
     icon: "/iqfavicon.png",

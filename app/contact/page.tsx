@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Mail, Clock, Send } from "lucide-react";
 import { Badge } from "../components/ui/Badge";
@@ -25,6 +25,7 @@ export default function Contact() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const isContactInfoFilled = formData.firstName.trim() !== "" && 
@@ -37,9 +38,9 @@ export default function Contact() {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleScheduleChange = (date: Date | null, time: string | null) => {
+  const handleScheduleChange = useCallback((date: Date | null, time: string | null) => {
     setScheduleData({ date, time });
-  };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -61,8 +62,14 @@ export default function Contact() {
 
       if (response.ok) {
         setSubmitStatus("success");
+        setSubmitted(true);
         setFormData({ firstName: "", lastName: "", email: "", phone: "", subject: "", message: "" });
         setScheduleData({ date: null, time: null });
+
+        setTimeout(() => {
+          setSubmitted(false);
+          setSubmitStatus("idle");
+        }, 3500); // 3.5 seconds
       } else {
         setSubmitStatus("error");
       }
@@ -73,6 +80,7 @@ export default function Contact() {
       setIsSubmitting(false);
     }
   };
+
   return (
     <div className="relative min-h-screen">
       <Navbar />
@@ -87,8 +95,7 @@ export default function Contact() {
           >
             <Badge className="mb-6">Contact Us</Badge>
             <h1 className="font-heading text-4xl md:text-6xl font-bold tracking-tight text-[#1f1a22]">
-              Let’s Start Working<br />
-              <span className="text-[#500088]">Together!</span>
+              Ready to Transform Your <span className="text-[#500088]">Recruitment Agency?</span>
             </h1>
           </motion.div>
 
@@ -101,9 +108,9 @@ export default function Contact() {
               className="flex flex-col justify-start pt-4 space-y-10 lg:col-span-5"
             >
               <div>
-                <h3 className="font-heading text-2xl font-bold text-[#1f1a22] mb-6">Get in Touch</h3>
+                <h3 className="font-heading text-2xl font-bold text-[#1f1a22] mb-6">Schedule Your Custom Consultation</h3>
                 <p className="text-lg text-[#4c4452] leading-relaxed">
-                  Have questions about RekrutIQ? Want to see a custom demo? Our team is ready to help you streamline your recruitment agency operations.
+                  Discover how RekrutIQ can streamline your sourcing, automate your billing, and increase your agency's margins. Connect with our experts for a tailored demonstration of the platform.
                 </p>
               </div>
 
@@ -148,122 +155,150 @@ export default function Contact() {
               </div>
             </motion.div>
 
-            {/* Contact Form (Right) */}
+            {/* Contact Form / Success View (Right) */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
               className="lg:col-span-7"
             >
-              <form onSubmit={handleSubmit} className="glass-panel p-8 md:p-10 rounded-[2rem] border border-[#E5E7EB] shadow-xl bg-white relative">
-                <div className="absolute top-0 right-0 p-8 opacity-5">
+              <div className="glass-panel p-8 md:p-10 rounded-[2rem] border border-[#E5E7EB] shadow-xl bg-white relative">
+                <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
                   <Send className="w-48 h-48 text-[#500088]" />
                 </div>
-                <div className="relative z-10 space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-[#1f1a22]">First Name*</label>
-                      <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
-                        placeholder="Rahul"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-[#1f1a22]">Last Name*</label>
-                      <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
-                        placeholder="Sharma"
-                      />
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-[#1f1a22]">Your Mail*</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
-                        placeholder="rahul@example.com"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-semibold text-[#1f1a22]">Phone Number*</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
-                        placeholder="+91 98765 43210"
-                      />
-                    </div>
-                  </div>
+                <AnimatePresence mode="wait">
+                  {submitted ? (
+                    <motion.div
+                      key="success-card"
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      transition={{ duration: 0.3 }}
+                      className="min-h-[420px] flex flex-col items-center justify-center text-center space-y-4 py-12 relative z-10"
+                    >
+                      <div className="w-16 h-16 bg-[#fbf0fc] border border-[#500088]/20 text-[#500088] flex items-center justify-center rounded-full text-2xl font-bold animate-bounce shadow-sm">
+                        ✓
+                      </div>
+                      <h3 className="font-heading text-2xl font-bold text-[#1f1a22]">
+                        Consultation Scheduled Successfully
+                      </h3>
+                      <p className="font-sans text-sm text-[#4c4452] max-w-md leading-relaxed">
+                        Our systems have queued your request. A calendar invitation has been sent to your work email address with the meeting details.
+                      </p>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      key="contact-form"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onSubmit={handleSubmit}
+                      className="relative z-10 space-y-6"
+                    >
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-[#1f1a22]">First Name*</label>
+                          <input
+                            type="text"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
+                            placeholder="Rahul"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-[#1f1a22]">Last Name*</label>
+                          <input
+                            type="text"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
+                            placeholder="Sharma"
+                          />
+                        </div>
+                      </div>
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-[#1f1a22]">Your Subject*</label>
-                    <input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
-                      placeholder="How can we help?"
-                    />
-                  </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-[#1f1a22]">Your Mail*</label>
+                          <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
+                            placeholder="rahul@example.com"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-semibold text-[#1f1a22]">Phone Number*</label>
+                          <input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={handleInputChange}
+                            required
+                            className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
+                            placeholder="+91 98765 43210"
+                          />
+                        </div>
+                      </div>
 
-                  <div className="space-y-2">
-                    <label className="text-sm font-semibold text-[#1f1a22]">Write your message</label>
-                    <textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleInputChange}
-                      rows={4}
-                      className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all resize-none"
-                      placeholder="Tell us more about your requirements..."
-                    />
-                  </div>
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-[#1f1a22]">Your Subject*</label>
+                        <input
+                          type="text"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleInputChange}
+                          required
+                          className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all"
+                          placeholder="How can we help?"
+                        />
+                      </div>
 
-                  <AnimatePresence>
-                    {isContactInfoFilled && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0, marginTop: 0 }}
-                        animate={{ opacity: 1, height: "auto", marginTop: 24 }}
-                        exit={{ opacity: 0, height: 0, marginTop: 0 }}
-                        className="overflow-hidden"
-                      >
-                        <ScheduleConsultation onScheduleChange={handleScheduleChange} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      <div className="space-y-2">
+                        <label className="text-sm font-semibold text-[#1f1a22]">Write your message</label>
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          rows={4}
+                          className="w-full px-4 py-3 rounded-xl border border-[#E5E7EB] bg-[#fbf0fc]/30 focus:outline-none focus:ring-2 focus:ring-[#500088] focus:border-transparent transition-all resize-none"
+                          placeholder="Tell us more about your requirements..."
+                        />
+                      </div>
 
-                  <Button type="submit" size="lg" className="w-full mt-4" disabled={isSubmitting}>
-                    {isSubmitting ? "Scheduling..." : "Schedule Now"}
-                  </Button>
+                      <AnimatePresence>
+                        {isContactInfoFilled && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                            animate={{ opacity: 1, height: "auto", marginTop: 24 }}
+                            exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                            className="overflow-hidden"
+                          >
+                            <ScheduleConsultation onScheduleChange={handleScheduleChange} />
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
-                  {submitStatus === "success" && (
-                    <p className="text-green-600 text-sm font-semibold text-center mt-2">Your message has been sent successfully!</p>
+                      <Button type="submit" size="lg" className="w-full mt-4" disabled={isSubmitting}>
+                        {isSubmitting ? "Scheduling..." : "Schedule Now"}
+                      </Button>
+
+                      {submitStatus === "error" && (
+                        <p className="text-red-600 text-sm font-semibold text-center mt-2">There was an error sending your message. Please try again.</p>
+                      )}
+                    </motion.form>
                   )}
-                  {submitStatus === "error" && (
-                    <p className="text-red-600 text-sm font-semibold text-center mt-2">There was an error sending your message. Please try again.</p>
-                  )}
-                </div>
-              </form>
+                </AnimatePresence>
+              </div>
             </motion.div>
           </div>
         </section>

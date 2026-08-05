@@ -43,15 +43,17 @@ export default function Home() {
           >
             <Badge variant="default" className="mb-8">RekrutIQ Next-Gen</Badge>
             <h1 className="font-heading text-5xl md:text-7xl font-bold tracking-tight mb-8 leading-[1.1] text-[#1f1a22]">
-              Intelligent Recruitment Platform
+              The Intelligent Platform Built Exclusively for Recruitment Agencies
             </h1>
             <p className="text-lg md:text-xl text-[#4c4452] mb-10 max-w-2xl mx-auto leading-relaxed">
-              Streamline sourcing, candidate tracking, and invoicing in one enterprise-grade platform. Built for speed, powered by intelligence.
+              Stop jumping between scattered tools. RekrutIQ combines a powerful ATS, client CRM, AI-driven candidate sourcing, and automated invoicing into one enterprise-grade command center. Scale your staffing firm faster with AI.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button size="lg" className="w-full sm:w-auto gap-2 cursor-pointer">
-                Start Free Trial <ArrowRight className="w-4 h-4" />
-              </Button>
+              <Link href="/contact" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full sm:w-auto gap-2 cursor-pointer">
+                  Start Free Trial <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
               <Link href="/contact" className="w-full sm:w-auto">
                 <Button size="lg" variant="secondary" className="w-full cursor-pointer">
                   Book a Demo
@@ -136,10 +138,10 @@ export default function Home() {
                 Built for Recruiters. Powered by AI.
               </h4>
               <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-6 text-[#1f1a22] leading-tight">
-                What Makes rekrutIQ® Different?
+                What Makes RekrutIQ the Best Software for Recruitment Agencies?
               </h2>
               <p className="text-[#4c4452] mb-6 leading-relaxed">
-                rekrutIQ® isn't just another ATS. It's a recruitment-first platform that combines everything your agency needs:
+                RekrutIQ is not a generic HR tool. It is a purpose-built ecosystem designed to solve the exact bottlenecks of modern staffing firms. By leveraging AI and automation, agencies using RekrutIQ experience measurable growth:
               </p>
               <p className="text-xs text-[#7e7383] mb-10 italic">
                 * These figures can vary based on agency size, team maturity, and adoption level.
@@ -147,28 +149,28 @@ export default function Home() {
 
               <div className="space-y-6 mb-10">
                 <div>
-                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-2">
-                    <span>Sourcing Time reduces by *</span>
-                    <span>55%</span>
+                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-1">
+                    <span>55% Reduction in Sourcing Time</span>
                   </div>
+                  <p className="text-xs text-[#4c4452] mb-2">AI parses and ranks candidates instantly.</p>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div className="bg-[#6b21a8] h-2 rounded-full" style={{ width: '55%' }}></div>
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-2">
-                    <span>Sourcing Cost reduces by *</span>
-                    <span>45%</span>
+                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-1">
+                    <span>45% Lower Sourcing Costs</span>
                   </div>
+                  <p className="text-xs text-[#4c4452] mb-2">Re-engage your existing talent pool instead of paying for new job board credits.</p>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div className="bg-[#6b21a8] h-2 rounded-full" style={{ width: '45%' }}></div>
                   </div>
                 </div>
                 <div>
-                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-2">
-                    <span>Turn Around Time (TAT) reduces by *</span>
-                    <span>33%</span>
+                  <div className="flex justify-between text-sm font-bold text-[#1f1a22] mb-1">
+                    <span>33% Faster Turn-Around Time (TAT)</span>
                   </div>
+                  <p className="text-xs text-[#4c4452] mb-2">Automated workflows from client requisition to candidate offer.</p>
                   <div className="w-full bg-gray-200 rounded-full h-2">
                     <div className="bg-[#6b21a8] h-2 rounded-full" style={{ width: '33%' }}></div>
                   </div>
@@ -194,9 +196,9 @@ export default function Home() {
               transition={{ duration: 0.6 }}
               className="text-center max-w-3xl mx-auto"
             >
-              <Badge variant="warning" className="mb-6 uppercase">OUR UNIQUE FEATURES</Badge>
+              <Badge variant="warning" className="mb-6 uppercase">CORE SOLUTIONS</Badge>
               <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight text-[#1f1a22]">
-                Discover Our Unique Features
+                Everything Your Staffing Firm Needs to Scale
               </h2>
             </motion.div>
           </div>
@@ -205,43 +207,43 @@ export default function Home() {
             <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
               {[
                 {
-                  title: "ATS + CRM in One",
-                  desc: "Manage candidates, clients, and jobs from a single dashboard.",
+                  title: "Unified ATS & CRM",
+                  desc: "Manage your clients, job orders, and candidate pipelines from a single dashboard.",
                   icon: <Building2 className="w-6 h-6" />,
                   color: "text-[#EF4444]",
                   link: "Read More"
                 },
                 {
-                  title: "Auto Invoicing Integration",
-                  desc: "Generate and sync invoices with Zoho, QuickBooks, or Tally.",
-                  icon: <Receipt className="w-6 h-6" />,
-                  color: "text-[#10B981]",
-                  link: "Read More"
-                },
-                {
-                  title: "Live Performance Analytics",
-                  desc: "Track recruiter KPIs, revenue, and time-to-fill in real time.",
-                  icon: <BarChart3 className="w-6 h-6" />,
-                  color: "text-[#8B5CF6]",
-                  link: "Read More"
-                },
-                {
                   title: "AI Candidate Matching",
-                  desc: "Surface best-fit profiles instantly from your existing database.",
+                  desc: "Instantly discover the best-fit profiles from your existing resume database using intelligent scoring.",
                   icon: <Search className="w-6 h-6" />,
                   color: "text-[#3B82F6]",
                   link: "Read More"
                 },
                 {
+                  title: "Automated Invoicing & Payroll Sync",
+                  desc: "Seamlessly generate invoices upon placement and sync contract staffing payroll with QuickBooks, Zoho, Tally, or yfy®.",
+                  icon: <Receipt className="w-6 h-6" />,
+                  color: "text-[#10B981]",
+                  link: "Read More"
+                },
+                {
+                  title: "Live Agency Analytics",
+                  desc: "Track recruiter performance, time-to-fill, and revenue forecasts in real time.",
+                  icon: <BarChart3 className="w-6 h-6" />,
+                  color: "text-[#8B5CF6]",
+                  link: "Read More"
+                },
+                {
                   title: "Built-In Communication Tools",
-                  desc: "Connect Gmail, Zoom, Teams & more—fully synced in one place.",
+                  desc: "Keep clients and recruiters aligned with integrated communication (Gmail, Outlook, Zoom).",
                   icon: <Mail className="w-6 h-6" />,
                   color: "text-[#F59E0B]",
                   link: "Read More"
                 },
                 {
-                  title: "AI Resume Database",
-                  desc: "Build and reuse a smart, searchable talent pool automatically.",
+                  title: "Auto-Building Talent Pool",
+                  desc: "Every parsed resume automatically builds a searchable, dynamic database you own forever.",
                   icon: <Database className="w-6 h-6" />,
                   color: "text-[#EC4899]",
                   link: "Read More"
@@ -265,43 +267,43 @@ export default function Home() {
               {/* Duplicate array for seamless marquee */}
               {[
                 {
-                  title: "ATS + CRM in One",
-                  desc: "Manage candidates, clients, and jobs from a single dashboard.",
+                  title: "Unified ATS & CRM",
+                  desc: "Manage your clients, job orders, and candidate pipelines from a single dashboard.",
                   icon: <Building2 className="w-6 h-6" />,
                   color: "text-[#EF4444]",
                   link: "Read More"
                 },
                 {
-                  title: "Auto Invoicing Integration",
-                  desc: "Generate and sync invoices with Zoho, QuickBooks, or Tally.",
-                  icon: <Receipt className="w-6 h-6" />,
-                  color: "text-[#10B981]",
-                  link: "Read More"
-                },
-                {
-                  title: "Live Performance Analytics",
-                  desc: "Track recruiter KPIs, revenue, and time-to-fill in real time.",
-                  icon: <BarChart3 className="w-6 h-6" />,
-                  color: "text-[#8B5CF6]",
-                  link: "Read More"
-                },
-                {
                   title: "AI Candidate Matching",
-                  desc: "Surface best-fit profiles instantly from your existing database.",
+                  desc: "Instantly discover the best-fit profiles from your existing resume database using intelligent scoring.",
                   icon: <Search className="w-6 h-6" />,
                   color: "text-[#3B82F6]",
                   link: "Read More"
                 },
                 {
+                  title: "Automated Invoicing & Payroll Sync",
+                  desc: "Seamlessly generate invoices upon placement and sync contract staffing payroll with QuickBooks, Zoho, Tally, or yfy®.",
+                  icon: <Receipt className="w-6 h-6" />,
+                  color: "text-[#10B981]",
+                  link: "Read More"
+                },
+                {
+                  title: "Live Agency Analytics",
+                  desc: "Track recruiter performance, time-to-fill, and revenue forecasts in real time.",
+                  icon: <BarChart3 className="w-6 h-6" />,
+                  color: "text-[#8B5CF6]",
+                  link: "Read More"
+                },
+                {
                   title: "Built-In Communication Tools",
-                  desc: "Connect Gmail, Zoom, Teams & more—fully synced in one place.",
+                  desc: "Keep clients and recruiters aligned with integrated communication (Gmail, Outlook, Zoom).",
                   icon: <Mail className="w-6 h-6" />,
                   color: "text-[#F59E0B]",
                   link: "Read More"
                 },
                 {
-                  title: "AI Resume Database",
-                  desc: "Build and reuse a smart, searchable talent pool automatically.",
+                  title: "Auto-Building Talent Pool",
+                  desc: "Every parsed resume automatically builds a searchable, dynamic database you own forever.",
                   icon: <Database className="w-6 h-6" />,
                   color: "text-[#EC4899]",
                   link: "Read More"
@@ -341,10 +343,10 @@ export default function Home() {
                 FROM REQUISITION TO REVENUE — ALL IN ONE PLATFORM
               </h4>
               <h2 className="font-heading text-4xl md:text-5xl font-bold tracking-tight mb-6 text-[#1f1a22] leading-tight">
-                Built to Automate Every Step
+                Automate Every Step: From Requisition to Revenue
               </h2>
               <p className="text-[#4c4452] mb-10 leading-relaxed">
-                No more tool-hopping or spreadsheet headaches. RekrutIQ simplifies:
+                RekrutIQ acts as your agency’s operating system.
               </p>
 
               <div className="space-y-8">
@@ -353,9 +355,9 @@ export default function Home() {
                     <Zap className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Smarter Hiring Workflow</h4>
+                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Smarter Workflows</h4>
                     <p className="text-[#4c4452] text-sm leading-relaxed">
-                      From creating job orders to sourcing and tracking candidates — manage everything in one place with AI-driven efficiency.
+                      Move seamlessly from capturing client requirements to sourcing, screening, and submitting candidates.
                     </p>
                   </div>
                 </div>
@@ -365,9 +367,9 @@ export default function Home() {
                     <Users className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Seamless Collaboration & Communication</h4>
+                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Frictionless Collaboration</h4>
                     <p className="text-[#4c4452] text-sm leading-relaxed">
-                      Keep clients in the loop with centralized messaging and real-time feedback tools built right into your workflow.
+                      Keep clients and recruiters aligned with integrated communication (Gmail, Outlook, Zoom).
                     </p>
                   </div>
                 </div>
@@ -377,9 +379,9 @@ export default function Home() {
                     <BarChart3 className="w-6 h-6" />
                   </div>
                   <div>
-                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Automated Financials & Performance Insights</h4>
+                    <h4 className="font-heading font-bold text-lg text-[#1f1a22] mb-1">Instant Financials</h4>
                     <p className="text-[#4c4452] text-sm leading-relaxed">
-                      Instantly generate invoices after placements and track recruiter performance with built-in analytics — no spreadsheets required.
+                      Close the loop by automatically triggering billing workflows the moment a candidate is successfully placed.
                     </p>
                   </div>
                 </div>
@@ -424,11 +426,13 @@ export default function Home() {
                 Join top recruitment firms scaling their operations with rekrutIQ's intelligent platform. Built for Recruiters. Powered by AI.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <Button size="lg" className="bg-white text-[#500088] hover:bg-[#fbf0fc]">
-                  Get Started Today
-                </Button>
                 <Link href="/contact">
-                  <Button size="lg" variant="ghost" className="text-white border-white hover:bg-white/10 hover:text-white">
+                  <Button size="lg" className="bg-white text-[#500088] hover:bg-[#fbf0fc] cursor-pointer">
+                    Get Started Today
+                  </Button>
+                </Link>
+                <Link href="/contact">
+                  <Button size="lg" variant="ghost" className="text-white border-white hover:bg-white/10 hover:text-white cursor-pointer">
                     Schedule Demo
                   </Button>
                 </Link>
