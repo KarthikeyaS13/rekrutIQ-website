@@ -4,11 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Mail, Plus, User } from "lucide-react";
+import { Mail, Plus, User, Menu, X } from "lucide-react";
 import { Button } from "./ui/Button";
+import { useState } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -38,8 +40,8 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   className={`text-sm font-semibold px-4 py-2 rounded-full transition-all ${isActive
-                      ? "bg-[#f1dbff] text-[#500088]"
-                      : "text-[#7e7383] hover:text-[#500088] hover:bg-[#fbf0fc]"
+                    ? "bg-[#f1dbff] text-[#500088]"
+                    : "text-[#7e7383] hover:text-[#500088] hover:bg-[#fbf0fc]"
                     }`}
                 >
                   {link.name}
@@ -64,12 +66,44 @@ export function Navbar() {
               </div>
               <span className="hidden sm:inline">Let's Talk</span>
             </Link>
-            <Link href="https://yfyai.online" target="_blank" rel="noopener noreferrer">
+            <Link href="https://rekrutiq.ai" target="_blank" rel="noopener noreferrer" className="hidden sm:block">
               <Button size="md" className="rounded-full px-6 gap-2">Login <User className="h-4 w-4" /></Button>
             </Link>
 
+            <button 
+              className="flex md:hidden items-center justify-center h-10 w-10 rounded-full bg-[#f1dbff] text-[#500088] transition-colors hover:bg-[#e4b8f9]"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <motion.div 
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="md:hidden mt-4 glass-panel rounded-3xl p-4 flex flex-col gap-2"
+          >
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <Link
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={`text-base font-semibold px-4 py-3 rounded-2xl transition-all ${isActive
+                    ? "bg-[#f1dbff] text-[#500088]"
+                    : "text-[#7e7383] hover:text-[#500088] hover:bg-[#fbf0fc]"
+                    }`}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </motion.div>
+        )}
       </div>
     </motion.header>
   );

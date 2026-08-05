@@ -18,7 +18,7 @@ export default function Contact() {
     subject: "",
     message: ""
   });
-  
+
   const [scheduleData, setScheduleData] = useState<{ date: Date | null; time: string | null }>({
     date: null,
     time: null,
@@ -28,10 +28,10 @@ export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const isContactInfoFilled = formData.firstName.trim() !== "" && 
-                              formData.lastName.trim() !== "" && 
-                              formData.email.trim() !== "" && 
-                              formData.phone.trim() !== "";
+  const isContactInfoFilled = formData.firstName.trim() !== "" &&
+    formData.lastName.trim() !== "" &&
+    formData.email.trim() !== "" &&
+    formData.phone.trim() !== "";
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -135,7 +135,6 @@ export default function Contact() {
                     <h4 className="font-heading font-semibold text-xl text-[#1f1a22] mb-2">Email Address:</h4>
                     <p className="text-[#4c4452] text-lg flex flex-col gap-1">
                       <a href="mailto:info@rekrutiq.io" className="hover:text-[#500088] transition-colors">info@rekrutiq.io</a>
-                      <a href="mailto:rekrutiq@finnovo.io" className="hover:text-[#500088] transition-colors">rekrutiq@finnovo.io</a>
                     </p>
                   </div>
                 </div>
