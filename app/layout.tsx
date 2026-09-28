@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Inter, Geist } from "next/font/google";
 import "./globals.css";
 
@@ -33,6 +34,24 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-R70LMVXZJ3"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-R70LMVXZJ3');
+            `,
+          }}
+        />
+      </head>
       <body className={`${inter.variable} ${geist.variable} font-sans min-h-screen bg-brand-surface text-brand-on-surface selection:bg-brand-primary-container selection:text-white`}>
         {children}
       </body>
